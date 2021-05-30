@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './Menu.css';
 
 const Menu = () => (
-  <div className="container">
+  <div className="container-main">
     <nav className="desktop-nav-container">
       <div>
         <Link className="logo-container" to="/">

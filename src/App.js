@@ -1,15 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import HomePage from './home/HomePage';
 import SignUpPage from './auth/SignUpPage';
 import LoginPage from './auth/LoginPage';
 import Menu from './home/Menu';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

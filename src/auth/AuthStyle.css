@@ -1,0 +1,72 @@
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.form-container {
+    margin-top: 10rem;
+    width: 30rem;
+    background: white;
+    border-radius: 2rem;
+    border: 3px solid #0074d9;
+    padding: 2.5rem;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-top: 1rem;
+}
+
+.form-group label{
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 1rem;
+    text-decoration: none;
+    background-color: #0074d9;
+    padding: 0.5rem 2rem;
+    color: white;
+    border-radius: 3px;
+    border: 1px solid #0074d9;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+    color: #0074d9;
+    background-color: white
+}
+
+.forgot-password {
+    font-size: 0.8rem;
+    align-self: flex-end;
+}
+
+.forgot-password a{
+    text-decoration: none;
+}
+
+.custom-checkbox input {
+    margin-right: 0.5rem;
+}
+
+.warring {
+    font-size: 0.9rem;
+    color: #ff0000;
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width: 576px) {
+    .form-container {
+        margin-top: 5rem;
+        width: auto;
+    }
+}
