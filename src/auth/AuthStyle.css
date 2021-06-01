@@ -7,7 +7,7 @@
 }
 
 .form-container {
-    margin-top: 10rem;
+    margin-top: 5rem;
     width: 30rem;
     background: white;
     border-radius: 2rem;
@@ -69,4 +69,9 @@
         margin-top: 5rem;
         width: auto;
     }
+}
+
+.alert {
+    position: absolute !important;
+    top: 11%;
 }

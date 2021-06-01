@@ -3,11 +3,44 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore} from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './redux/reducer';
+
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if(serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (e) {
+    return undefined;
+  }
+};
+
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (e) {
+    // Ignore write errors;
+  }
+};
+
+const persistedState = loadState();
+
+const store = createStore(reducer, persistedState)
+
+// This is actually call every time when store saved
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

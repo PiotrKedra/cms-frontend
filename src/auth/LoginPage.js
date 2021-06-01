@@ -1,15 +1,39 @@
 import './AuthStyle.css';
 import React from 'react';
+import axios from 'axios';
+import BACKEND_URL from '../properties';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../redux/actions';
 
-const LoginPage = () => {
+const LoginPage = ({saveLoginData}) => {
+
+  const history = useHistory();
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(email);
-    console.log(password);
+
+    const credentials = {
+      loginOrEmail: email,
+      password: password
+    }
+
+    axios.post(BACKEND_URL + 'auth/', credentials)
+      .then(res => {
+        console.log(res.data.token);
+        const userData = {
+          token: res.data.token,
+          userEmail: email,
+        }
+        saveLoginData(userData);
+        history.push('/');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   return (
@@ -55,4 +79,10 @@ const LoginPage = () => {
   );
 }
 
-export default LoginPage;
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  saveLoginData: (userData) => { dispatch(login(userData))}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

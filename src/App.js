@@ -9,12 +9,17 @@ import SignUpPage from './auth/SignUpPage';
 import LoginPage from './auth/LoginPage';
 import Menu from './home/Menu';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import UserDashboard from './user_dashboard/UserDashboard';
+
 
 function App() {
   return (
     <Router>
       <Menu />
       <Switch>
+        <Route path="/dashboard">
+          <UserDashboard />
+        </Route>
         <Route path="/sign_up">
           <SignUpPage />
         </Route>

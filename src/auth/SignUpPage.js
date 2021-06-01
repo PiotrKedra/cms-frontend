@@ -1,15 +1,22 @@
 import React from 'react';
 import './AuthStyle.css';
+import axios from 'axios';
+import BACKEND_URL from '../properties';
+import { useHistory } from 'react-router-dom';
 
 const SignUpPage = () => {
+
+  const history = useHistory();
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [repeatPassword, setRepeatPassword] = React.useState('');
   const [passConfirmation, setPassConfirmation] = React.useState('');
+  const [isError, setIsError] = React.useState(false);
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
     console.log(name);
     console.log(email);
@@ -17,13 +24,40 @@ const SignUpPage = () => {
     console.log(repeatPassword);
     if(password !== repeatPassword) {
       setPassConfirmation('Given passwords doesn\'t match');
+      return;
     } else {
       setPassConfirmation('');
     }
+
+    const new_user = {
+      username: name,
+      email: email,
+      password: password
+    }
+
+
+    axios.post(BACKEND_URL + 'auth/register/', new_user)
+      .then(res => {
+        history.push('/login');
+      })
+      .catch(error => {
+        setIsError(true);
+        setTimeout(() => setIsError(false), 5000);
+      });
+
   }
 
   return (
     <div className="login-container">
+
+      {
+        isError && (
+          <div className="alert alert-danger" role="alert">
+            There was some error, pleas try again.
+          </div>
+        )
+      }
+
       <form className="form-container" onSubmit={handleSubmit}>
         <h3>Welcome</h3>
 

@@ -58,3 +58,33 @@
     background-color: #0074d9;
 }
 
+.logged-container {
+    display: flex;
+    align-items: center;
+    transition: all 0.1s ease-out;
+}
+
+.logged-container:hover .account-icon-container{
+    transform: scale(1.05);
+}
+
+.user-name-text {
+    color: white;
+    margin: 0 1rem 0 0;
+}
+
+.account-icon-container {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.account-icon {
+    height: 1.5rem;
+}
+

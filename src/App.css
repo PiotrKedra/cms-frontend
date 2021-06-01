@@ -37,4 +37,8 @@
   }
 }
 
+.alert {
+  position: absolute;
+  top: 20%;
+}
 
