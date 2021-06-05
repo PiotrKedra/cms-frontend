@@ -1,0 +1,68 @@
+.presentation-container {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.title-container {
+    display: flex;
+
+}
+
+.title-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.time-text {
+    font-size: 0.7rem;
+    color: gray;
+    text-align: end;
+    margin: 0;
+}
+
+.author-text {
+    font-size: 0.8rem;
+    color: gray;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.description-text {
+    margin: 0.8rem 0 0;
+    line-height: 12pt;
+    font-size: 0.8rem;
+}
+
+.minor-btn {
+    width: 100%;
+    margin-top: 1rem;
+    text-decoration: none;
+    background-color: white;
+    padding: 0.5rem 2rem;
+    color: gray;
+    border-radius: 3px;
+    border: 1px solid gray;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.minor-btn:hover {
+    color: #0074d9;
+    background-color: white;
+    border: 1px solid #0074d9;
+}
+
+.no-pres-text {
+    color: lightgray;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.modal-content {
+    background-color: transparent;
+}

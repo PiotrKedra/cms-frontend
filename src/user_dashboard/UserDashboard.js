@@ -12,6 +12,10 @@ const UserDashboard = ({clearUserData}) => {
         clearUserData();
         history.push('/');
       }}>Logout</button>
+
+      <button onClick={() => {
+        history.push('/conference/create/1');
+      }}>Create conference</button>
     </div>
   );
 }

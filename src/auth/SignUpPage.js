@@ -18,10 +18,6 @@ const SignUpPage = () => {
   const handleSubmit = (event) => {
 
     event.preventDefault();
-    console.log(name);
-    console.log(email);
-    console.log(password);
-    console.log(repeatPassword);
     if(password !== repeatPassword) {
       setPassConfirmation('Given passwords doesn\'t match');
       return;
@@ -36,7 +32,7 @@ const SignUpPage = () => {
     }
 
 
-    axios.post(BACKEND_URL + 'auth/register/', new_user)
+    axios.post(BACKEND_URL + 'api/auth/register/', new_user)
       .then(res => {
         history.push('/login');
       })

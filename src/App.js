@@ -10,6 +10,11 @@ import LoginPage from './auth/LoginPage';
 import Menu from './home/Menu';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import UserDashboard from './user_dashboard/UserDashboard';
+import ConferenceForm from './conference/ConferenceForm';
+import ConferenceFormPresentation from './conference/ConferenceFormPresentation';
+
+
+
 
 
 function App() {
@@ -17,6 +22,12 @@ function App() {
     <Router>
       <Menu />
       <Switch>
+        <Route path="/conference/create/2">
+          <ConferenceFormPresentation />
+        </Route>
+        <Route path="/conference/create/1">
+          <ConferenceForm />
+        </Route>
         <Route path="/dashboard">
           <UserDashboard />
         </Route>
