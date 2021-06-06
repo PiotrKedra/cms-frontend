@@ -6,8 +6,9 @@ import './ConfStyle.css';
 import axios from 'axios';
 import BACKEND_URL from '../properties';
 import { Button, Modal } from 'react-bootstrap';
+import { refresh } from '../redux/actions';
 
-const ConferenceFormPresentation = ({token}) => {
+const ConferenceFormPresentation = ({token, refreshHome}) => {
 
   const history = useHistory();
   const location = useLocation();
@@ -18,7 +19,10 @@ const ConferenceFormPresentation = ({token}) => {
 
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (event) => {
+    event.preventDefault();
+    setShow(true);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +41,8 @@ const ConferenceFormPresentation = ({token}) => {
         console.log(error);
       });
 
-    history.push('/')
+    history.push('/');
+    refreshHome();
   }
 
   const addNewPresentation = (event) => {
@@ -92,7 +97,7 @@ const ConferenceFormPresentation = ({token}) => {
               }
             )
           }
-          <button className="minor-btn" onClick={handleShow}>Add presentation</button>
+          <button className="minor-btn" onClick={(event) => handleShow(event)}>Add presentation</button>
         </div>
 
         <button type="submit" className="submit-btn" >Create conference</button>
@@ -164,6 +169,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  refreshHome: () => {dispatch(refresh())}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConferenceFormPresentation);

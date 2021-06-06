@@ -3,6 +3,7 @@ const initState = {
   token: null,
   userName: null,
   userEmail: null,
+  refresh: false,
 }
 
 const reducer = (state = initState, action) => {
@@ -21,6 +22,12 @@ const reducer = (state = initState, action) => {
         token: null,
         userEmail: null,
       }
+    case 'REFRESH':{
+      return {
+        ...state,
+        refresh: !state.refresh
+      }
+    }
     default:
       return state;
   }

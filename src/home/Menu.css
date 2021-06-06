@@ -47,7 +47,7 @@
     border-bottom: 1px solid white;
 }
 
-.major-btn {
+.sing-up-btn {
     text-decoration: none;
     background-color: white;
     padding: 0.5rem 1rem;
@@ -57,7 +57,7 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-.major-btn:hover {
+.sing-up-btn:hover {
     color: white;
     background-color: #0074d9;
 }

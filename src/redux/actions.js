@@ -6,3 +6,9 @@ export const login = (userData) => ({
 export const logout = () => ({
   type: "LOGOUT",
 })
+
+export const refresh = () => ({
+  type: "REFRESH",
+})
+
+

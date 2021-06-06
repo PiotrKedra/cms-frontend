@@ -26,7 +26,7 @@ const Menu = ({isLogged, userEmail}) => {
             ) : (
               <React.Fragment>
                 <Link className="menu-button" to="/login">Login</Link>
-                <Link className="major-btn" to="/sign_up">Sign up</Link>
+                <Link className="sing-up-btn" to="/sign_up">Sign up</Link>
               </React.Fragment>
             )
           }

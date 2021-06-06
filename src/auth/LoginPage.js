@@ -29,7 +29,7 @@ const LoginPage = ({saveLoginData}) => {
           userEmail: email,
         }
         saveLoginData(userData);
-        history.push('/');
+        history.push('/dashboard');
       })
       .catch(error => {
         console.log(error);
