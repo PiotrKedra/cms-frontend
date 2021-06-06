@@ -11,7 +11,7 @@ const Menu = ({isLogged, userEmail}) => {
       <nav className="desktop-nav-container">
         <div>
           <Link className="logo-container" to="/">
-            <p className="logo-text">CONFERENCE<span className="logo-text-second">SYSTEM</span></p>
+            <p className="logo-text">CONF<span className="logo-text-second">SYSTEM</span></p>
           </Link>
         </div>
         <div className="desktop-menu-container">

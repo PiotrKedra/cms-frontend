@@ -4,6 +4,10 @@
     box-shadow: 0 4px 2px -2px rgba(0,0,0,0.2);
     font-size: 0.8rem;
     font-weight: 600;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .desktop-nav-container {
