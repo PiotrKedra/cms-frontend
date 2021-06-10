@@ -3,8 +3,10 @@ import './AuthStyle.css';
 import axios from 'axios';
 import BACKEND_URL from '../properties';
 import { useHistory } from 'react-router-dom';
+import { login, showAlert } from '../redux/actions';
+import { connect } from 'react-redux';
 
-const SignUpPage = () => {
+const SignUpPage = ({alertOn}) => {
 
   const history = useHistory();
 
@@ -13,7 +15,6 @@ const SignUpPage = () => {
   const [password, setPassword] = React.useState('');
   const [repeatPassword, setRepeatPassword] = React.useState('');
   const [passConfirmation, setPassConfirmation] = React.useState('');
-  const [isError, setIsError] = React.useState(false);
 
   const handleSubmit = (event) => {
 
@@ -34,25 +35,30 @@ const SignUpPage = () => {
 
     axios.post(BACKEND_URL + 'api/auth/register/', new_user)
       .then(res => {
+
+        alertOn({
+          message: 'Your account was created.'
+        })
         history.push('/login');
       })
-      .catch(error => {
-        setIsError(true);
-        setTimeout(() => setIsError(false), 5000);
+      .catch(function (error) {
+        if (error.response.status === 409) {
+          alertOn({
+            type: 'error',
+            message: 'This mail is already registered.'
+          })
+        } else {
+          alertOn({
+            type: 'error',
+            message: 'There was some error, pleas try again.'
+          })
+        }
       });
 
   }
 
   return (
     <div className="login-container">
-
-      {
-        isError && (
-          <div className="alert alert-danger" role="alert">
-            There was some error, pleas try again.
-          </div>
-        )
-      }
 
       <form className="form-container" onSubmit={handleSubmit}>
         <h3>Welcome</h3>
@@ -119,4 +125,10 @@ const SignUpPage = () => {
   );
 }
 
-export default SignUpPage;
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  alertOn: (alertObj) => { dispatch(showAlert(alertObj))}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);

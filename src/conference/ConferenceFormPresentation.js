@@ -6,14 +6,12 @@ import './ConfStyle.css';
 import axios from 'axios';
 import BACKEND_URL from '../properties';
 import { Button, Modal } from 'react-bootstrap';
-import { refresh } from '../redux/actions';
+import { refresh, showAlert } from '../redux/actions';
 
-const ConferenceFormPresentation = ({token, refreshHome}) => {
+const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
 
   const history = useHistory();
   const location = useLocation();
-  console.log(location.state);
-  console.log(token)
 
   const [presentation, setPresentation] = React.useState([]);
 
@@ -35,14 +33,19 @@ const ConferenceFormPresentation = ({token, refreshHome}) => {
 
     axios.post(BACKEND_URL + 'conference/', location.state, config)
       .then(res => {
-        console.log(res.data);
+        console.log(location.state);
+        alertOn({
+          message: 'Conference ' + location.state.topic + ' was created.'
+        })
+        refreshHome();
+        history.push('/');
       })
       .catch(error => {
-        console.log(error);
+        alertOn({
+          type: 'error',
+          message: 'There was some error, pleas try again later.'
+        })
       });
-
-    history.push('/');
-    refreshHome();
   }
 
   const addNewPresentation = (event) => {
@@ -169,7 +172,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshHome: () => {dispatch(refresh())}
+  refreshHome: () => {dispatch(refresh())},
+  alertOn: (alertObj) => {dispatch(showAlert(alertObj))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConferenceFormPresentation);

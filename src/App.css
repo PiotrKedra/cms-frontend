@@ -37,8 +37,11 @@
   }
 }
 
-.alert {
-  position: absolute;
-  top: 20%;
+.alert-custom {
+  position: fixed;
+  top: 15%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 

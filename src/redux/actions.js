@@ -11,4 +11,16 @@ export const refresh = () => ({
   type: "REFRESH",
 })
 
+export const showAlert = (alert) => ({
+  type: "ALERT",
+  data: alert
+})
+
+export const cleanAlert = () => ({
+  type: "CLEAN_ALERT",
+})
+
+
+
+
 

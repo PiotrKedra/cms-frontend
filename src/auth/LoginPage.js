@@ -4,9 +4,9 @@ import axios from 'axios';
 import BACKEND_URL from '../properties';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions';
+import { login, showAlert } from '../redux/actions';
 
-const LoginPage = ({saveLoginData}) => {
+const LoginPage = ({saveLoginData, alertOn}) => {
 
   const history = useHistory();
 
@@ -29,10 +29,18 @@ const LoginPage = ({saveLoginData}) => {
           userEmail: email,
         }
         saveLoginData(userData);
+        alertOn({
+          type: 'ok',
+          message: 'You were logged successfully.'
+        })
         history.push('/dashboard');
       })
       .catch(error => {
-        console.log(error);
+        alertOn({
+          type: 'error',
+          message: 'Wrong credentials.'
+        });
+        setPassword('');
       });
   }
 
@@ -75,7 +83,8 @@ const LoginPage = ({saveLoginData}) => {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  saveLoginData: (userData) => { dispatch(login(userData))}
+  saveLoginData: (userData) => { dispatch(login(userData))},
+  alertOn: (alertObj) => { dispatch(showAlert(alertObj))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

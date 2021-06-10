@@ -4,6 +4,11 @@ const initState = {
   userName: null,
   userEmail: null,
   refresh: false,
+  isAlert: false,
+  alert: {
+    type: 1,
+    message: ''
+  }
 }
 
 const reducer = (state = initState, action) => {
@@ -26,6 +31,19 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         refresh: !state.refresh
+      }
+    }
+    case 'ALERT': {
+      return {
+        ...state,
+        isAlert: true,
+        alert: action.data
+      }
+    }
+    case 'CLEAN_ALERT': {
+      return {
+        ...state,
+        isAlert: false
       }
     }
     default:
