@@ -16,6 +16,7 @@ import ConferenceFormPresentation from './conference/ConferenceFormPresentation'
 import { Alert } from 'react-bootstrap';
 import { cleanAlert } from './redux/actions';
 import { connect } from 'react-redux';
+import ConferenceDashboard from './conference/ConferenceDashboard';
 
 
 function App({isAlert, alert, alertOff}) {
@@ -40,6 +41,9 @@ function App({isAlert, alert, alertOff}) {
       }
 
       <Switch>
+        <Route path="/conference/dashboard/:id">
+          <ConferenceDashboard />
+        </Route>
         <Route path="/conference/create/2">
           <ConferenceFormPresentation />
         </Route>

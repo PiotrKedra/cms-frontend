@@ -74,7 +74,7 @@ const UserDashboard = ({globalState, clearUserData, alertOn}) => {
 
             {
               usersConfs.map((conf) => (
-                <div className="presentation-container">
+                <div className="presentation-container" onClick={() => history.push('/conference/dashboard/' + conf.id)}>
                   <p className="time-text">17:00 - 23:33</p>
                   <h2 className="title-text">{conf.topic}</h2>
                   <p className="author-text">You are the owner</p>

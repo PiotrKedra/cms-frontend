@@ -143,6 +143,23 @@
     }
 }
 
+.author_and_time-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.author_and_time-container p {
+    color: gray;
+}
+
+.description-text-main {
+    font-size: 1.3rem;
+}
+
+.button-container {
+    display: flex;
+}
+
 
 
 

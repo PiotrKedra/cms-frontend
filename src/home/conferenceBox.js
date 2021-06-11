@@ -5,8 +5,11 @@ import { logout, showAlert } from '../redux/actions';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import BACKEND_URL from '../properties';
+import { useHistory } from 'react-router-dom';
 
 const ConferenceBox = ({ conference, globalState, alertOn }) => {
+
+  const histroy = useHistory();
 
   const enroll = () => {
     const config = {
@@ -19,12 +22,14 @@ const ConferenceBox = ({ conference, globalState, alertOn }) => {
         alertOn({
           message: 'Successfully enrolled in' + conference.topic + 'conference'
         })
+        histroy.push('/conference/dashboard/10');
       })
       .catch(error => {
         alertOn({
           type: 'error',
           message: 'There was some error, pleas try again later.'
         })
+        histroy.push('/conference/dashboard/10');
       });
   }
 
