@@ -16,10 +16,6 @@ const HomePage = ({globalState}) => {
     console.log(e.target.value)
   }
 
-  console.log(globalState);
-
-
-
   React.useEffect(() => {
     const config = {
       headers: {

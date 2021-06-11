@@ -1,8 +1,32 @@
 import React, { useEffect } from 'react';
 import './ConferenceBox.css';
 import conferenceIcon from '../assets/icons/conference.png';
+import { logout, showAlert } from '../redux/actions';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import BACKEND_URL from '../properties';
 
-const ConferenceBox = ({ conference }) => {
+const ConferenceBox = ({ conference, globalState, alertOn }) => {
+
+  const enroll = () => {
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${globalState.token}`,
+      }
+    };
+    axios.get(BACKEND_URL + `enroll/${conference.id}`, config)
+      .then(res => {
+        alertOn({
+          message: 'Successfully enrolled in' + conference.topic + 'conference'
+        })
+      })
+      .catch(error => {
+        alertOn({
+          type: 'error',
+          message: 'There was some error, pleas try again later.'
+        })
+      });
+  }
 
     return (
 
@@ -19,7 +43,7 @@ const ConferenceBox = ({ conference }) => {
                         {conference.description}
                     </div>
                     <div className="buttonBox">
-                        <button type="button" className="btn btn-primary">Enroll in</button>
+                        <button type="button" className="btn btn-primary" onClick={() => enroll()}>Enroll in</button>
                     </div>
                 </div>
 
@@ -29,5 +53,12 @@ const ConferenceBox = ({ conference }) => {
     );
 }
 
+const mapStateToProps = (state) => ({
+  globalState: state
+})
 
-export default ConferenceBox;
+const mapDispatchToProps = (dispatch) => ({
+  alertOn: (alertObj) => { dispatch(showAlert(alertObj))}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConferenceBox);
