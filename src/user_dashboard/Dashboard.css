@@ -160,6 +160,38 @@
     display: flex;
 }
 
+.participant-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.participant {
+    display: flex;
+    margin-top: 1.5rem;
+    margin-right: 2rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.participant-img {
+    width: 50px;
+    height: 50px;
+    transition: all 0.1s ease-out;
+}
+
+.participant:hover .participant-img{
+    transform: scale(1.05);
+}
+
+.participant p{
+    margin: 0;
+    padding: 0 0 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+
+
 
 
 

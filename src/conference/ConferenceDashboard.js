@@ -12,7 +12,7 @@ const ConferenceDashboard = ({globalState}) => {
   const { id } = useParams();
 
   const [conf, setConf] = React.useState({});
-  const [participants, setParticipants] = React.useState({});
+  const [participants, setParticipants] = React.useState([]);
 
 
   React.useEffect(() => {
@@ -49,6 +49,16 @@ const ConferenceDashboard = ({globalState}) => {
           <p className="description-text-main">{conf.description}</p>
           <div className="conferences-container">
             <h3 className="enrolled-conferences-title">All participants</h3>
+            <div className="participant-container">
+              {
+                participants.map(men => (
+                  <div className="participant">
+                    <img className="participant-img" src={profilePict}/>
+                    <p>{men.email}</p>
+                  </div>
+                ))
+              }
+            </div>
           </div>
         </div>
         <div className="container_2">
