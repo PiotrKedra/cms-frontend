@@ -235,8 +235,8 @@ const ConferenceDashboard = ({globalState, alertOn, refreshHome}) => {
                   </>
                 ) : (
                   isEnrolled()
-                    ? <button onClick={() => disenroll()}>Disenroll</button>
-                    : <button onClick={() => enroll()}>Enroll</button>
+                    ? <button className="minor-btn" onClick={() => disenroll()}>Disenroll</button>
+                    : <button className="major-btn" onClick={() => enroll()}>Enroll</button>
                 )
               }
             </div>
