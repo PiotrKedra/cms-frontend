@@ -77,10 +77,6 @@ const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
       endTime,
       day
     }
-    let hmm = moment(day + '/' + startTime.format('hh:mm'), 'YYYY-MM-DD/hh:mm');
-    hmm.format('YYYY-MM-DDTHH:mm:ss:SSZ')
-
-    console.log(newPresentation)
     setTitle('')
     setStartTime(null)
     setEndTime(null)
