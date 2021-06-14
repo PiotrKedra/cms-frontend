@@ -16,7 +16,6 @@ const HomePage = ({globalState}) => {
   const handleSearchInput = (value) => {
     setSearchConference(value);
     if(value.length > 2) {
-      console.log('search fonrererer')
       setConferences(conferencesv1.filter(c => c.topic.includes(value)))
     }
     else {
@@ -26,7 +25,32 @@ const HomePage = ({globalState}) => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    const copy = [...conferencesv1]
+    if (e.target.value === 'name'){
+      setConferences(copy.sort(compareName));
+    } else {
+      setConferences(copy.sort(compareDate));
+    }
+  }
+
+  function compareDate( a, b ) {
+    if ( a.startDate < b.startDate ){
+      return -1;
+    }
+    if ( a.startDate > b.startDate ){
+      return 1;
+    }
+    return 0;
+  }
+
+  function compareName( a, b ) {
+    if ( a.topic < b.topic ){
+      return -1;
+    }
+    if ( a.topic > b.topic ){
+      return 1;
+    }
+    return 0;
   }
 
   React.useEffect(() => {
