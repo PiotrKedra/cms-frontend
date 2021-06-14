@@ -91,6 +91,7 @@
     border-radius: 3px;
     border: 1px solid white;
     transition: opacity 0.3s ease-in-out;
+    padding: 0.3rem 0.8rem;
 }
 
 .remove-btn:hover {
@@ -191,7 +192,39 @@
 }
 
 
+.hmm {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
 
+.hehe {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #0074d9;
+    padding: 2rem;
+}
 
+.xdxd {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.xd-btn {
+    text-decoration: none;
+    background-color: white;
+    color: gray;
+    border-radius: 3px;
+    border: 1px solid white;
+    transition: opacity 0.3s ease-in-out;
+    padding: 0.3rem 0.8rem;
+}
+
+.xd-btn:hover {
+    color: black;
+}
 
 

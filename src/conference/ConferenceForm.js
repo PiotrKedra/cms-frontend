@@ -17,36 +17,15 @@ const ConferenceForm = ({token}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(token)
-    console.log(topic)
-    console.log(startTime)
-    console.log(endTime)
-    console.log(description)
-
     const form = {
       topic,
-      startTime,
-      endTime,
+      startDate: startTime,
+      endDate: endTime,
       description
     }
 
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      }
-
-    };
-
     history.push('/conference/create/2', form);
 
-
-    // axios.post(BACKEND_URL + 'conference/', form, config)
-    //   .then(res => {
-    //     console.log(res.data);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
   }
 
   return (

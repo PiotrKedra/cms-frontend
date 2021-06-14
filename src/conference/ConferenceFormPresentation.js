@@ -5,8 +5,12 @@ import '../auth/AuthStyle.css';
 import './ConfStyle.css';
 import axios from 'axios';
 import BACKEND_URL from '../properties';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import { refresh, showAlert } from '../redux/actions';
+import { TimePicker } from 'antd';
+import 'antd/dist/antd.css';
+import moment from 'moment'; // or 'antd/dist/antd.less'
+
 
 const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
 
@@ -14,6 +18,8 @@ const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
   const location = useLocation();
 
   const [presentation, setPresentation] = React.useState([]);
+  const [selectedDate, handleDateChange] = React.useState(new Date());
+
 
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
@@ -25,15 +31,29 @@ const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const press = presentation.map(p => {
+      return {
+        name: p.title,
+        startTime: moment(p.day + '/' + p.startTime.format('hh:mm'), 'YYYY-MM-DD/hh:mm').format('YYYY-MM-DDTHH:mm'),
+        endTime: moment(p.day + '/' + p.endTime.format('hh:mm'), 'YYYY-MM-DD/hh:mm').format('YYYY-MM-DDTHH:mm')
+      }
+    })
+
+    const body = {
+      ...location.state,
+      presentations: press
+    }
+
+    console.log(body)
+
     const config = {
       headers: {
         'Authorization': `Bearer ${token}`,
       }
     };
 
-    axios.post(BACKEND_URL + 'conference/', location.state, config)
+    axios.post(BACKEND_URL + 'conference/', body, config)
       .then(res => {
-        console.log(location.state);
         alertOn({
           message: 'Conference ' + location.state.topic + ' was created.'
         })
@@ -46,6 +66,7 @@ const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
           message: 'There was some error, pleas try again later.'
         })
       });
+
   }
 
   const addNewPresentation = (event) => {
@@ -54,23 +75,23 @@ const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
       title,
       startTime,
       endTime,
-      author,
-      description
+      day
     }
+    let hmm = moment(day + '/' + startTime.format('hh:mm'), 'YYYY-MM-DD/hh:mm');
+    hmm.format('YYYY-MM-DDTHH:mm:ss:SSZ')
+
+    console.log(newPresentation)
     setTitle('')
-    setStartTime('')
-    setEndTime('')
-    setDescription('')
-    setAuthor('')
+    setStartTime(null)
+    setEndTime(null)
     presentation.push(newPresentation);
     handleClose();
   }
 
   const [title, setTitle] = React.useState('');
-  const [startTime, setStartTime] = React.useState('');
-  const [endTime, setEndTime] = React.useState('');
-  const [author, setAuthor] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [startTime, setStartTime] = React.useState();
+  const [endTime, setEndTime] = React.useState();
+  const [day, setDay] = React.useState();
 
   return (
     <div className="login-container">
@@ -90,11 +111,9 @@ const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
                 ) :
               presentation.map(pres => {
                 return (
-                  <div className="presentation-container">
-                    <p className="time-text">{pres.startTime} - {pres.endTime}</p>
+                  <div className="presentation-container" key={pres.title}>
+                    <p className="time-text">{pres.day + ' '} ({pres.startTime.format('hh:mm')} - {pres.endTime.format('hh:mm')})</p>
                     <p className="title-text">{pres.title}</p>
-                    <p className="author-text">{pres.author}</p>
-                    <p className="description-text">{pres.description}</p>
                   </div>
                 )
               }
@@ -120,45 +139,30 @@ const ConferenceFormPresentation = ({token, refreshHome, alertOn}) => {
           </div>
 
           <div className="form-group">
-            <label>Author</label>
-            <input
-              className="form-control"
-              placeholder="Enter author name"
-              value={author}
-              required
-              onChange={(e) => setAuthor(e.target.value)}/>
-          </div>
-
-          <div className="form-group">
-            <label>Start time</label>
+            <label>Day</label>
             <input
               type="date"
               className="form-control"
-              value={startTime}
+              value={day}
               required
-              onChange={(e) => setStartTime(e.target.value)}/>
+              onChange={(e) => setDay(e.target.value)}/>
           </div>
 
-          <div className="form-group">
-            <label>End time</label>
-            <input
-              type="date"
-              className="form-control"
-              value={endTime}
-              required
-              onChange={(e) => setEndTime(e.target.value)}/>
+          <div className="lolz">
+            <div className="lolz2">
+              <label>Start time</label>
+              <TimePicker value={startTime} onChange={(start) => setStartTime(start)} format={'HH:mm'} />
+            </div>
+
+            <div className="lolz2">
+              <label>End time</label>
+              <TimePicker value={endTime} onChange={(end) => setEndTime(end)} format={'HH:mm'} />
+            </div>
           </div>
 
-          <div className="form-group">
-            <label>Description</label>
-            <textarea
-              className="form-control"
-              placeholder="Description goes here"
-              value={description}
-              required
-              rows={5}
-              onChange={(e) => setDescription(e.target.value)}/>
-          </div>
+          <Form.Group>
+            <Form.File id="exampleFormControlFile1" label="Attach presentation file" />
+          </Form.Group>
 
           <button type="submit" className="submit-btn" >Add</button>
         </form>

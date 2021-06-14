@@ -9,8 +9,21 @@ import BACKEND_URL from '../properties';
 const HomePage = ({globalState}) => {
 
   const [conferences, setConferences] = React.useState([]);
+  const [conferencesv1, setConferencesv1] = React.useState([]);
 
   const [searchConference, setSearchConference] = React.useState('');
+
+  const handleSearchInput = (value) => {
+    setSearchConference(value);
+    if(value.length > 2) {
+      console.log('search fonrererer')
+      setConferences(conferencesv1.filter(c => c.topic.includes(value)))
+    }
+    else {
+      console.log(' all conferences')
+      setConferences(conferencesv1)
+    }
+  }
 
   const handleChange = (e) => {
     console.log(e.target.value)
@@ -24,8 +37,10 @@ const HomePage = ({globalState}) => {
     };
     axios.get(BACKEND_URL + 'conferences/', config)
       .then(res => {
-        setConferences(res.data.reverse());
         console.log(res.data)
+        const confers = res.data.reverse();
+        setConferences(confers);
+        setConferencesv1(confers);
       })
       .catch(error => {
         console.log(error);
@@ -38,7 +53,7 @@ const HomePage = ({globalState}) => {
 
       <div className="homeHeader">
         <div className="homeSearchBar">
-          <input className="searchBar" placeholder="Search" value={searchConference} onChange={(e) => setSearchConference(e.target.value)} />
+          <input className="searchBar" placeholder="Search" value={searchConference} onChange={(e) => handleSearchInput(e.target.value)} />
         </div>
         <div className="sortBox">
           <label className="sortLabel">Sort by: </label>

@@ -3,8 +3,16 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    border-radius: 15px;
     margin-top: 1.5rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.1s ease-out;
+}
+
+.conferenceBox:hover {
+    transform: scale(1.02);
 }
 
 .conferenceImage {

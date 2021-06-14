@@ -1,7 +1,6 @@
 .homePage {
     display: flex;
     flex-direction: column;
-    background-color: #E7E8EA;
     padding-left: 10%;
     padding-right: 10%;
     padding-top: 4rem;
